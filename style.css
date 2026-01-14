@@ -1,0 +1,247 @@
+/* [CSS] V20.0 Dark Zone Edition (Repaired & Optimized) */
+
+/* =========================================
+   1. 全域變數與核心色系 (The Core Palette)
+   ========================================= */
+:root {
+    /* 基礎背景與文字 (Light Mode) */
+    --bg-color: #f0f2f5;
+    --panel-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --metric-bg: #f8fafc;
+    --metric-value: #0f172a;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    /* 狀態背景色 (Light) - 淡淡的果凍色 */
+    --bg-status-safe: rgba(16, 185, 129, 0.1);
+    --bg-status-warn: rgba(245, 158, 11, 0.1);
+    --bg-status-danger: rgba(239, 68, 68, 0.1);
+    
+    /* 功能色 (標準) */
+    --c-system: #3b82f6; /* 藍 */
+    --c-safe: #059669;   /* 深綠 (白底用深一點才清楚) */
+    --c-warn: #d97706;   /* 深黃 */
+    --c-danger: #dc2626; /* 深紅 */
+    --c-purple: #7c3aed; /* 紫 */
+    --c-orange: #ea580c; /* 橘 */
+    --c-gray: #94a3b8;
+}
+
+/* 🌑 黑暗模式重構 (Dark Mode Overhaul) */
+body.dark-mode {
+    --bg-color: #000000;         /* 純黑背景，適合 OLED */
+    --panel-bg: #111827;         /* 深灰面板 */
+    --text-primary: #f1f5f9;     /* 亮白文字 */
+    --text-secondary: #cbd5e1;   /* 淺灰文字 */
+    --metric-bg: #1f2937;
+    --metric-value: #f8fafc;
+    --border-color: #374151;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 加深陰影 */
+
+    /* 狀態背景色 (Dark) - 提高透明度，避免髒髒的感覺 */
+    --bg-status-safe: rgba(16, 185, 129, 0.25);
+    --bg-status-warn: rgba(245, 158, 11, 0.25);
+    --bg-status-danger: rgba(239, 68, 68, 0.25);
+
+    /* 功能色 (螢光版) - 黑底要用亮色 */
+    --c-system: #60a5fa; /* 亮藍 */
+    --c-safe: #34d399;   /* 螢光綠 */
+    --c-warn: #fbbf24;   /* 亮黃 */
+    --c-danger: #f87171; /* 亮紅 */
+    --c-purple: #a78bfa; /* 亮紫 */
+    --c-orange: #fb923c; /* 亮橘 */
+}
+
+/* =========================================
+   2. 基礎佈局 (Layout)
+   ========================================= */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0; padding: 10px;
+    background-color: var(--bg-color);
+    display: flex; flex-direction: column; align-items: center;
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* 防止手機向下拉重新整理 */
+    overscroll-behavior-y: contain; 
+}
+
+/* 遮罩層 (啟動畫面) */
+#system-boot-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #020617; /* 永遠是深色 */
+    z-index: 9998;
+    display: flex; justify-content: center; align-items: center;
+    flex-direction: column;
+}
+
+#boot-btn {
+    padding: 20px 40px; font-size: 1.1rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: white;
+    box-shadow: 0 0 35px rgba(37, 99, 235, 0.4);
+    cursor: pointer; display: flex; flex-direction: column; align-items: center;
+    transition: transform 0.2s;
+}
+#boot-btn:active { transform: scale(0.96); }
+
+/* =========================================
+   3. 組件樣式 (Components)
+   ========================================= */
+
+/* 影像容器 */
+.video-container {
+    position: relative; 
+    width: 100%; max-width: 640px;
+    margin-bottom: 20px; border-radius: 16px; overflow: hidden;
+    box-shadow: var(--shadow); background: #000;
+    display: flex; justify-content: center; align-items: center; aspect-ratio: 4/3;
+}
+.input_video { display: none; }
+.output_canvas { width: 100%; height: 100%; object-fit: cover; display: block; }
+.output_canvas.zoom-125 { transform: scale(1.25); }
+.output_canvas.zoom-150 { transform: scale(1.50); }
+
+#loader {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 10;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    color: white;
+}
+.spinner {
+    width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.2);
+    border-top-color: var(--c-purple); border-radius: 50%;
+    animation: spin 1s infinite linear; margin-bottom: 15px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 主面板 */
+.panel {
+    background: var(--panel-bg); padding: 20px; border-radius: 16px;
+    box-shadow: var(--shadow); width: 100%; max-width: 600px;
+    border: 1px solid var(--border-color); box-sizing: border-box;
+}
+
+/* 頂部控制列 */
+.top-controls {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);
+}
+.info-icon {
+    font-size: 0.85rem; font-weight: 600; color: var(--c-purple);
+    background: rgba(139, 92, 246, 0.1); padding: 6px 12px;
+    border-radius: 20px; cursor: pointer;
+}
+
+/* 狀態顯示條 */
+.status-text {
+    font-size: 1rem; padding: 15px; border-radius: 12px; margin-bottom: 15px;
+    display: flex; flex-direction: column; gap: 5px;
+    transition: all 0.3s; border: 1px solid transparent;
+}
+.status-text .line-1 { font-size: 1.3rem; font-weight: 700; }
+.status-text .line-2 { opacity: 0.9; font-size: 1.1rem; font-family: monospace; font-weight: 600; }
+
+.status-text.safe { background: var(--bg-status-safe); color: var(--c-safe); border-color: var(--bg-status-safe); }
+.status-text.warning { background: var(--bg-status-warn); color: var(--c-warn); border-color: var(--bg-status-warn); }
+.status-text.danger { 
+    background: var(--bg-status-danger); color: var(--c-danger); border-color: var(--bg-status-danger);
+    animation: pulseDanger 1s infinite;
+}
+@keyframes pulseDanger { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
+
+/* 防禦條 (Adaptive Bar) */
+.adaptive-bar { display: flex; gap: 10px; margin-bottom: 20px; align-items: stretch; }
+.strategy-display {
+    flex: 2; padding: 12px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 700; font-size: 0.95rem; border: 1px solid transparent;
+}
+.strategy-display.conservative { background: var(--bg-status-safe); color: var(--c-safe); border-color: var(--c-safe); }
+.strategy-display.aggressive { background: var(--bg-status-danger); color: var(--c-danger); border-color: var(--c-danger); }
+
+.fp-btn {
+    flex: 1.5; background: var(--panel-bg); border: 1px solid var(--c-orange);
+    color: var(--c-orange); border-radius: 10px; font-weight: 600; cursor: pointer;
+    font-size: 0.85rem;
+}
+
+/* 防禦核心 */
+.defense-panel {
+    background: var(--metric-bg); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 12px; margin-bottom: 20px;
+}
+.defense-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
+.defense-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10px 5px; border-radius: 10px; border: 1px solid transparent;
+    background: var(--panel-bg); color: var(--text-secondary); cursor: pointer;
+}
+.defense-btn.active.blue { background: rgba(59, 130, 246, 0.1); border-color: var(--c-system); color: var(--c-system); }
+.defense-btn.active.purple { background: rgba(124, 58, 237, 0.1); border-color: var(--c-purple); color: var(--c-purple); }
+.defense-btn.active.orange { background: rgba(234, 88, 12, 0.1); border-color: var(--c-orange); color: var(--c-orange); }
+.defense-btn.off { opacity: 0.6; filter: grayscale(1); }
+
+/* 儀表板 */
+.dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.metric { background: var(--metric-bg); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
+.metric-value { font-size: 1.1rem; font-weight: 700; color: var(--metric-value); font-family: monospace; }
+.metric-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+
+/* 按鈕群組 */
+.control-buttons-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px; }
+.control-button {
+    padding: 12px 16px; font-size: 0.9rem; font-weight: 500;
+    border: none; border-radius: 10px; cursor: pointer; color: white;
+    flex: 1 1 auto;
+}
+.control-button.off { background-color: var(--c-gray) !important; color: #e2e8f0; opacity: 0.8; }
+.system-btn { background-color: var(--c-system); } 
+.green-btn { background-color: var(--c-safe); } 
+.yellow-btn { background-color: var(--c-warn); color: #FFF; } 
+.purple-btn { background-color: var(--c-purple); } 
+.warning { background-color: var(--c-warn); }
+.danger { background-color: var(--c-danger); }
+
+/* 戰功牆 Modal */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); z-index: 9995;
+    display: flex; justify-content: center; align-items: center;
+    backdrop-filter: blur(5px);
+}
+.modal-card {
+    background: var(--panel-bg); width: 90%; max-width: 600px; max-height: 85vh;
+    border-radius: 16px; position: relative; display: flex; flex-direction: column;
+}
+.history-header {
+    padding: 15px 25px; background: var(--panel-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex; align-items: center; justify-content: space-between;
+}
+.history-body {
+    padding: 20px; background: var(--metric-bg); display: none;
+}
+.history-group.active .history-body { display: block; }
+.close-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); }
+
+/* 氣泡通知 */
+.toast {
+    position: fixed; top: 20px; right: -350px;
+    background: var(--panel-bg); padding: 15px;
+    border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-left: 5px solid var(--c-safe); z-index: 10001;
+    transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex; gap: 15px; align-items: center;
+}
+.toast.show { right: 20px; }
+
+/* 雙軌音量 */
+.volume-control-group { background: var(--metric-bg); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+.vol-row { margin-bottom: 10px; }
+input[type="range"] { width: 100%; margin-top: 5px; }
+
+/* 圖表容器 */
+.chart-container { display: none; margin-top: 20px; padding: 10px; background: var(--panel-bg); border-radius: 12px; }
