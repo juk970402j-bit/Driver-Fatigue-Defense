@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>V20.1 Driver Fatigue Defense</title>
+    <title>V20.2 Driver Fatigue Defense</title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -18,17 +19,40 @@
     <div id="toast-notification" class="toast">
         <div class="toast-icon">🛡️</div>
         <div class="toast-content">
-            <div class="toast-title">V20.1 系統修復</div>
-            <div class="toast-message">核心連結已補齊，神經網路連線中...</div>
+            <div class="toast-title">V20.2 系統全開</div>
+            <div class="toast-message">豪華介面已載入，防禦核心上線。</div>
         </div>
     </div>
 
     <div id="system-boot-overlay">
         <button id="boot-btn">
-            <span class="boot-icon">🎙️</span>
-            <span class="boot-text">啟動 V20.1 防禦系統</span>
-            <span style="font-size: 0.8rem; opacity: 0.8; margin-top:5px;">(載入 Libraries & Audio Engine)</span>
+            <span class="boot-icon">🚀</span>
+            <span class="boot-text">啟動 V20.2 完整防禦系統</span>
+            <span style="font-size: 0.8rem; opacity: 0.8; margin-top:5px;">(Adaptive Defense & Dark Zone Protocol)</span>
         </button>
+    </div>
+
+    <div id="changelog-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <button id="close-changelog" class="close-btn">✖</button>
+            <div class="modal-header">
+                <h3>📜 專案開發全歷程</h3>
+                <p>V19.6 -> V20.2 (PWA 架構轉移完成)</p>
+            </div>
+            <div class="modal-content history-container">
+                <div class="history-group active">
+                    <div class="history-header">
+                        <span class="h-icon">🌌</span>
+                        <span class="h-title">V20.0 黑夜戰術協定</span>
+                    </div>
+                    <div class="history-body" style="display:block; padding:10px;">
+                        <p>✅ GitHub PWA 架構移植成功</p>
+                        <p>✅ 修復音量抑制問題</p>
+                        <p>✅ 實作 CSS 濾鏡夜視增強</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="video-container">
@@ -36,7 +60,7 @@
         <canvas class="output_canvas"></canvas>
         <div id="loader">
             <div class="spinner"></div>
-            <div id="load-progress">系統初始化...</div>
+            <div id="load-progress">正在載入神經網路...</div>
         </div>
     </div>
 
@@ -46,7 +70,12 @@
                 <input type="checkbox" id="darkModeToggle">
                 <label for="darkModeToggle">🌙 深色模式</label>
             </div>
-            <div class="info-icon">V20.1 Stable</div>
+            <div id="changelog-trigger" class="info-icon">📜 戰功牆</div>
+        </div>
+
+        <div id="circadian-indicator" class="circadian-box low-risk" style="margin-bottom:10px; font-size:0.8rem; color:var(--text-secondary);">
+            <span class="circadian-icon">⚡</span>
+            <span id="circadian-text">系統狀態: V20.2 運作中</span>
         </div>
 
         <div id="status" class="status-text warning">
@@ -64,7 +93,36 @@
             </button>
         </div>
 
+        <div class="defense-panel">
+            <h3 class="defense-title">
+                <span>🛡️ 防禦核心 (Defense Core)</span>
+            </h3>
+            <div class="defense-grid">
+                <button id="btn-def-calib" class="defense-btn blue active">
+                    <div class="def-icon">🔵</div>
+                    <div class="def-text"><span class="def-label">雙點校準</span><span class="def-status">ON</span></div>
+                </button>
+                <button id="btn-def-3d" class="defense-btn purple active">
+                    <div class="def-icon">🟣</div>
+                    <div class="def-text"><span class="def-label">3D 補償</span><span class="def-status">ON</span></div>
+                </button>
+                <button id="btn-def-iris" class="defense-btn orange off">
+                    <div class="def-icon">🟠</div>
+                    <div class="def-text"><span class="def-label">虹膜裁決</span><span class="def-status">OFF</span></div>
+                </button>
+            </div>
+            <div class="defense-info" id="defense-info-text">動態策略: 允許忽略睫毛陰影 (Level 1)</div>
+        </div>
+
         <div class="dashboard">
+            <div class="metric">
+                <div id="metric-time" class="metric-value">00:00</div>
+                <div class="metric-label">時間</div>
+            </div>
+            <div class="metric">
+                <div id="metric-alarms" class="metric-value">0 次</div>
+                <div class="metric-label">警報</div>
+            </div>
             <div class="metric">
                 <div id="metric-fps" class="metric-value">-- FPS</div>
                 <div class="metric-label">幀率</div>
@@ -74,8 +132,12 @@
                 <div class="metric-label">詳細指數</div>
             </div>
             <div class="metric">
-                <div id="metric-time" class="metric-value">00:00</div>
-                <div class="metric-label">時間</div>
+                <div id="metric-pitch" class="metric-value">0.0 °</div>
+                <div class="metric-label">俯仰角</div>
+            </div>
+            <div class="metric">
+                <div id="metric-yaw" class="metric-value">0.0 °</div>
+                <div class="metric-label">偏航角</div>
             </div>
         </div>
 
@@ -92,15 +154,19 @@
 
         <div class="control-buttons-group">
             <button id="btn-audio-status" class="control-button system-btn">🔒 音效未解鎖</button>
+            <button id="btn-voice-test" class="control-button purple-btn">🗣️ 測試語音</button>
             <button id="btn-mic-toggle" class="control-button system-btn off">🎤 麥克風</button>
+            
             <button id="toggleCamera" class="control-button system-btn">重啟鏡頭</button>
+            
+            <button id="toggleChart" class="control-button yellow-btn">顯示圖表</button>
         </div>
 
-        <div id="chartContainer" class="chart-container" style="display:block;">
+        <div id="chartContainer" class="chart-container">
             <canvas id="perclosChart"></canvas>
         </div>
         
-        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.1 One-Shot Fix (External Links Loaded)</div>
+        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.2 Full Integrated (GitHub PWA)</div>
     </div>
     
     <script src="script.js"></script>
