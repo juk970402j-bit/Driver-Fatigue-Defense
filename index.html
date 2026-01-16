@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>V20.2 Driver Fatigue Defense</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>V20.2 Driver Fatigue Defense (PWA)</title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -36,19 +37,125 @@
         <div class="modal-card">
             <button id="close-changelog" class="close-btn">✖</button>
             <div class="modal-header">
-                <h3>📜 專案開發全歷程</h3>
-                <p>V19.6 -> V20.2 (PWA 架構轉移完成)</p>
+                <h3>📜 專案開發全歷程 (The Complete Saga)</h3>
+                <p>本專案歷經 30+ 版本迭代，從原型的誕生到黑夜戰術的進化。</p>
             </div>
+            
             <div class="modal-content history-container">
                 <div class="history-group active">
                     <div class="history-header">
                         <span class="h-icon">🌌</span>
-                        <span class="h-title">V20.0 黑夜戰術協定</span>
+                        <span class="h-title">黑夜戰術協定 (The Dark Zone)</span>
+                        <span class="h-ver">V20.0+</span>
                     </div>
-                    <div class="history-body" style="display:block; padding:10px;">
-                        <p>✅ GitHub PWA 架構移植成功</p>
-                        <p>✅ 修復音量抑制問題</p>
-                        <p>✅ 實作 CSS 濾鏡夜視增強</p>
+                    <div class="history-body" style="display:block;">
+                         <div class="timeline-item highlight">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>🛡️ V20.2 基地轉移 (Migration)</h4>
+                                <p>成功遷移至 GitHub PWA 架構，突破 CodePen 效能限制。實作「音訊分流」修復通話音量抑制問題。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-group">
+                    <div class="history-header">
+                        <span class="h-icon">🟣</span>
+                        <span class="h-title">現代防禦體系 (The Modern Defense)</span>
+                        <span class="h-ver">V17.0 - V19.6</span>
+                    </div>
+                    <div class="history-body">
+                         <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V19.6 動態防禦 (Dynamic)</h4>
+                                <p>實作「保守/激進」雙態防禦邏輯，新增「誤報校正」與音訊分流控制。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V19.5 系統修復</h4>
+                                <p>修復麥克風按鈕遺失問題，重構歷史戰功牆架構。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V19.4 全感官優化</h4>
+                                <p>整合 Web Speech API 語音助理，實作聽覺化校準引導。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V18.0 階梯式防禦</h4>
+                                <p>實作 L1(提醒)/L2(警戒)/L3(危機) 三級警報邏輯。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>🔊 V17.0 音訊核心重構</h4>
+                                <p>導入 Web Audio API 底層架構，解決舊版雜音問題，為雙耳節拍 (Binaural Beats) 奠定基礎。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-group">
+                    <div class="history-header">
+                        <span class="h-icon">🟠</span>
+                        <span class="h-title">架構轉型期 (Evolution)</span>
+                        <span class="h-ver">V11.0 - V16.0</span>
+                    </div>
+                    <div class="history-body">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V16.0 狀態機架構</h4>
+                                <p>引入 State Machine 概念，嚴格管理 待機/校準/監控 狀態。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V15.0 權限突破</h4>
+                                <p>解決 iOS Safari 對於攝影機權限的嚴格限制，優化 HTTPS 請求。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V14.0 生理時鐘 (Dormant)</h4>
+                                <p>引入晝夜節律演算法，嘗試根據深夜時段加權疲勞指數。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>⚠️ V13.0 功能大爆炸</h4>
+                                <p>嘗試同時引入哈欠與頭部偵測導致邏輯互斥，後緊急回滾重構。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-group">
+                    <div class="history-header">
+                        <span class="h-icon">🔵</span>
+                        <span class="h-title">早期開發歷程 (Genesis)</span>
+                        <span class="h-ver">V1.0 - V10.0</span>
+                    </div>
+                    <div class="history-body">
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V10.0 標準化里程碑</h4><p>確立 EAR 幾何算法、綠色眼框標記與十字準星導引。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V9.0 記憶體優化</h4><p>解決長時間運作導致瀏覽器崩潰的問題，導入變數回收機制。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V8.0 平板適配</h4><p>針對 iPad 與 Android 平板的大螢幕進行 RWD 響應式佈局調整。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V6.0 混合架構</h4><p>實現「後台紀錄、前台隱藏」圖表架構。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V5.0 極限效能模式</h4><p>首創「關閉影像顯示」功能，大幅降低手機發熱。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V3.0 視覺化儀表板</h4><p>開發數據面板，整合 Chart.js 折線圖呈現疲勞趨勢。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V1.0 原型誕生</h4><p>專案啟動。成功連接 MediaPipe FaceMesh。</p></div></div>
                     </div>
                 </div>
             </div>
@@ -62,6 +169,7 @@
             <div class="spinner"></div>
             <div id="load-progress">正在載入神經網路...</div>
         </div>
+        <div id="night-vision-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; mix-blend-mode: overlay; background: rgba(0,255,0,0.1);"></div>
     </div>
 
     <div class="panel" id="mainPanel">
@@ -143,30 +251,69 @@
 
         <div class="volume-control-group">
             <div class="vol-row">
-                <div class="vol-header"><label>🔊 警報音量</label></div>
-                <input type="range" id="volAlarmSlider" min="0" max="100" value="100">
+                <div class="vol-header"><label>🔊 警報音量 (<span id="volAlarmVal">100%</span>)</label></div>
+                <input type="range" id="volAlarmSlider" min="0" max="100" value="100" class="slider-alarm">
             </div>
             <div class="vol-row">
-                <div class="vol-header"><label>🗣️ 語音音量</label></div>
-                <input type="range" id="volVoiceSlider" min="0" max="100" value="100">
+                <div class="vol-header">
+                    <label>🗣️ 語音音量 (<span id="volVoiceVal">100%</span>)</label>
+                    <div class="toggle-wrapper">
+                        <input type="checkbox" id="voiceGuideToggle" checked>
+                        <span style="font-size:0.8rem; margin-left:4px;">啟用</span>
+                    </div>
+                </div>
+                <input type="range" id="volVoiceSlider" min="0" max="100" value="100" class="slider-voice">
             </div>
         </div>
 
+        <div class="settings-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+            <div class="mode-control">
+                <label>偵測模式：</label>
+                <select id="detectionMode" style="width: 100%;">
+                    <option value="driving">🚗 行車模式</option>
+                    <option value="test">🧪 測試模式</option>
+                </select>
+            </div>
+            <div class="quality-control">
+                <label>畫質效能：</label>
+                <select id="qualitySelect" style="width: 100%;">
+                    <option value="ultra">🟣 1080p (極致)</option>
+                    <option value="high" selected>🔵 720p (旗艦)</option>
+                    <option value="mid">🟢 480p (平衡)</option>
+                    <option value="low">🟠 360p (流暢)</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button id="forceFatigueToggle" class="control-button danger" style="width: 100%;">⚠️ 強制疲勞 (除錯用)</button>
+        </div>
+
+        <div id="chartContainer" class="chart-container">
+            <h3>疲勞指數趨勢 (PERCLOS %)</h3>
+            <div style="height: 200px; position: relative;">
+                <canvas id="perclosChart"></canvas>
+            </div>
+        </div>
+        
         <div class="control-buttons-group">
             <button id="btn-audio-status" class="control-button system-btn">🔒 音效未解鎖</button>
             <button id="btn-voice-test" class="control-button purple-btn">🗣️ 測試語音</button>
             <button id="btn-mic-toggle" class="control-button system-btn off">🎤 麥克風</button>
             
             <button id="toggleCamera" class="control-button system-btn">重啟鏡頭</button>
+            <button id="toggleDisplay" class="control-button system-btn">關閉影像顯示</button>
             
-            <button id="toggleChart" class="control-button yellow-btn">顯示圖表</button>
-        </div>
-
-        <div id="chartContainer" class="chart-container">
-            <canvas id="perclosChart"></canvas>
+            <button id="btn-audio-test" class="control-button warning">🔊 測試音效</button>
+            <button id="toggleVibrateBtn" class="control-button warning">📳 震動 (開)</button>
+            <button id="btn-vibrate-test" class="control-button purple-btn">⚡ 測試震動</button>
+            
+            <button id="toggleGridBtn" class="control-button green-btn off">井字格線 (開)</button>
+            <button id="toggleZoomBtn" class="control-button purple-btn">影像縮放 (1.0x)</button>
+            <button id="toggleChart" class="control-button yellow-btn">顯示總結圖表</button>
         </div>
         
-        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.2 Full Integrated (GitHub PWA)</div>
+        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.2 Ultimate (GitHub PWA)</div>
     </div>
     
     <script src="script.js"></script>
