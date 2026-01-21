@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>V20.2 Driver Fatigue Defense (PWA)</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>V20.3 Driver Fatigue Defense (Ultimate)</title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -20,17 +21,26 @@
     <div id="toast-notification" class="toast">
         <div class="toast-icon">🛡️</div>
         <div class="toast-content">
-            <div class="toast-title">V20.2 系統全開</div>
-            <div class="toast-message">豪華介面已載入，防禦核心上線。</div>
+            <div class="toast-title">系統通知</div>
+            <div class="toast-message">載入中...</div>
         </div>
     </div>
 
     <div id="system-boot-overlay">
         <button id="boot-btn">
             <span class="boot-icon">🚀</span>
-            <span class="boot-text">啟動 V20.2 完整防禦系統</span>
-            <span style="font-size: 0.8rem; opacity: 0.8; margin-top:5px;">(Adaptive Defense & Dark Zone Protocol)</span>
+            <span class="boot-text">啟動 V20.3 完整防禦系統</span>
+            <span style="font-size: 0.8rem; opacity: 0.8; margin-top:5px;">(載入 Vertical Algorithm & Tour Bus Protocol)</span>
         </button>
+    </div>
+
+    <div id="black-screen-overlay" style="display:none;">
+        <div class="black-screen-content">
+            <div class="pulse-icon">🛡️</div>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">防禦運作中</div>
+            <div style="font-size: 0.9rem; opacity: 0.7;">直屏演算法校正 Active</div>
+            <div style="margin-top: 30px; font-size: 0.8rem; color: #666;">輕觸螢幕兩下喚醒</div>
+        </div>
     </div>
 
     <div id="changelog-modal" class="modal-overlay" style="display: none;">
@@ -38,22 +48,28 @@
             <button id="close-changelog" class="close-btn">✖</button>
             <div class="modal-header">
                 <h3>📜 專案開發全歷程 (The Complete Saga)</h3>
-                <p>本專案歷經 30+ 版本迭代，從原型的誕生到黑夜戰術的進化。</p>
+                <p>V1.0 原型 -> V20.3 靈魂注入版</p>
             </div>
             
             <div class="modal-content history-container">
                 <div class="history-group active">
                     <div class="history-header">
                         <span class="h-icon">🌌</span>
-                        <span class="h-title">黑夜戰術協定 (The Dark Zone)</span>
-                        <span class="h-ver">V20.0+</span>
+                        <span class="h-title">黑夜戰術協定 (V20+)</span>
                     </div>
                     <div class="history-body" style="display:block;">
                          <div class="timeline-item highlight">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>🛡️ V20.2 基地轉移 (Migration)</h4>
-                                <p>成功遷移至 GitHub PWA 架構，突破 CodePen 效能限制。實作「音訊分流」修復通話音量抑制問題。</p>
+                                <h4>🛡️ V20.3 靈魂注入 (Ultimate)</h4>
+                                <p>實裝「直屏演算法」、「遊覽車校準儀式」、「三級警報音效」與「瞇瞇眼雙重閾值」修正。</p>
+                            </div>
+                        </div>
+                         <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>V20.2 PWA 架構重組</h4>
+                                <p>成功遷移至 GitHub，修復音量抑制與效能問題。</p>
                             </div>
                         </div>
                     </div>
@@ -62,100 +78,39 @@
                 <div class="history-group">
                     <div class="history-header">
                         <span class="h-icon">🟣</span>
-                        <span class="h-title">現代防禦體系 (The Modern Defense)</span>
-                        <span class="h-ver">V17.0 - V19.6</span>
+                        <span class="h-title">現代防禦體系 (V17-V19)</span>
                     </div>
                     <div class="history-body">
-                         <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V19.6 動態防禦 (Dynamic)</h4>
-                                <p>實作「保守/激進」雙態防禦邏輯，新增「誤報校正」與音訊分流控制。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V19.5 系統修復</h4>
-                                <p>修復麥克風按鈕遺失問題，重構歷史戰功牆架構。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V19.4 全感官優化</h4>
-                                <p>整合 Web Speech API 語音助理，實作聽覺化校準引導。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V18.0 階梯式防禦</h4>
-                                <p>實作 L1(提醒)/L2(警戒)/L3(危機) 三級警報邏輯。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>🔊 V17.0 音訊核心重構</h4>
-                                <p>導入 Web Audio API 底層架構，解決舊版雜音問題，為雙耳節拍 (Binaural Beats) 奠定基礎。</p>
-                            </div>
-                        </div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V19.6 動態防禦</h4><p>實作「保守/激進」雙態邏輯。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V19.0 語音助理前導</h4><p>首次測試 Web Speech API，為語音引導奠基。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V18.0 階梯式防禦</h4><p>定義 L1/L2/L3 三級警報邏輯。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V17.0 音訊核心重構</h4><p>導入 Web Audio API，解決雜音問題。</p></div></div>
                     </div>
                 </div>
 
                 <div class="history-group">
                     <div class="history-header">
                         <span class="h-icon">🟠</span>
-                        <span class="h-title">架構轉型期 (Evolution)</span>
-                        <span class="h-ver">V11.0 - V16.0</span>
+                        <span class="h-title">架構轉型期 (V11-V16)</span>
                     </div>
                     <div class="history-body">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V16.0 狀態機架構</h4>
-                                <p>引入 State Machine 概念，嚴格管理 待機/校準/監控 狀態。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V15.0 權限突破</h4>
-                                <p>解決 iOS Safari 對於攝影機權限的嚴格限制，優化 HTTPS 請求。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>V14.0 生理時鐘 (Dormant)</h4>
-                                <p>引入晝夜節律演算法，嘗試根據深夜時段加權疲勞指數。</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>⚠️ V13.0 功能大爆炸</h4>
-                                <p>嘗試同時引入哈欠與頭部偵測導致邏輯互斥，後緊急回滾重構。</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V16.0 狀態機架構</h4><p>引入 State Machine 管理待機/校準狀態。</p></div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V12.0 精準度提升</h4><p>優化 EAR 閾值算法，減少誤報。</p></div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V11.0 動態閾值測試</h4><p>嘗試根據環境光線調整判定標準。</p></div></div>
                     </div>
                 </div>
 
                 <div class="history-group">
                     <div class="history-header">
                         <span class="h-icon">🔵</span>
-                        <span class="h-title">早期開發歷程 (Genesis)</span>
-                        <span class="h-ver">V1.0 - V10.0</span>
+                        <span class="h-title">早期開發歷程 (V1-V10)</span>
                     </div>
                     <div class="history-body">
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V10.0 標準化里程碑</h4><p>確立 EAR 幾何算法、綠色眼框標記與十字準星導引。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V9.0 記憶體優化</h4><p>解決長時間運作導致瀏覽器崩潰的問題，導入變數回收機制。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V8.0 平板適配</h4><p>針對 iPad 與 Android 平板的大螢幕進行 RWD 響應式佈局調整。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V6.0 混合架構</h4><p>實現「後台紀錄、前台隱藏」圖表架構。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V5.0 極限效能模式</h4><p>首創「關閉影像顯示」功能，大幅降低手機發熱。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V3.0 視覺化儀表板</h4><p>開發數據面板，整合 Chart.js 折線圖呈現疲勞趨勢。</p></div></div>
-                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V1.0 原型誕生</h4><p>專案啟動。成功連接 MediaPipe FaceMesh。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V10.0 標準化</h4><p>確立 EAR 幾何算法。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V7.0 聽覺導入</h4><p>首次加入警報音效功能。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V4.0 除錯優化</h4><p>修正畫面閃爍與記憶體洩漏問題。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V2.0 UI 初步優化</h4><p>從純文字介面升級為圖形化面板。</p></div></div>
+                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h4>V1.0 原型誕生</h4><p>專案啟動。</p></div></div>
                     </div>
                 </div>
             </div>
@@ -183,7 +138,7 @@
 
         <div id="circadian-indicator" class="circadian-box low-risk" style="margin-bottom:10px; font-size:0.8rem; color:var(--text-secondary);">
             <span class="circadian-icon">⚡</span>
-            <span id="circadian-text">系統狀態: V20.2 運作中</span>
+            <span id="circadian-text">系統狀態: V20.3 運作中</span>
         </div>
 
         <div id="status" class="status-text warning">
@@ -219,7 +174,7 @@
                     <div class="def-text"><span class="def-label">虹膜裁決</span><span class="def-status">OFF</span></div>
                 </button>
             </div>
-            <div class="defense-info" id="defense-info-text">動態策略: 允許忽略睫毛陰影 (Level 1)</div>
+            <div class="defense-info" id="defense-info-text">動態策略: 遊覽車校準 + 3D補償 + 虹膜</div>
         </div>
 
         <div class="dashboard">
@@ -277,10 +232,9 @@
             <div class="quality-control">
                 <label>畫質效能：</label>
                 <select id="qualitySelect" style="width: 100%;">
-                    <option value="ultra">🟣 1080p (極致)</option>
-                    <option value="high" selected>🔵 720p (旗艦)</option>
-                    <option value="mid">🟢 480p (平衡)</option>
-                    <option value="low">🟠 360p (流暢)</option>
+                    <option value="ultra">🟣 1080p</option>
+                    <option value="high" selected>🔵 720p</option>
+                    <option value="mid">🟢 480p</option>
                 </select>
             </div>
         </div>
@@ -301,19 +255,23 @@
             <button id="btn-voice-test" class="control-button purple-btn">🗣️ 測試語音</button>
             <button id="btn-mic-toggle" class="control-button system-btn off">🎤 麥克風</button>
             
-            <button id="toggleCamera" class="control-button system-btn">重啟鏡頭</button>
-            <button id="toggleDisplay" class="control-button system-btn">關閉影像顯示</button>
+            <button id="btn-camera-toggle" class="control-button system-btn">📷 鏡頭 (開)</button>
+            
+            <button id="toggleDisplay" class="control-button system-btn">關閉影像 (黑幕)</button>
             
             <button id="btn-audio-test" class="control-button warning">🔊 測試音效</button>
             <button id="toggleVibrateBtn" class="control-button warning">📳 震動 (開)</button>
             <button id="btn-vibrate-test" class="control-button purple-btn">⚡ 測試震動</button>
             
-            <button id="toggleGridBtn" class="control-button green-btn off">井字格線 (開)</button>
+            <button id="toggleGridBtn" class="control-button green-btn off">井字格線 (關)</button>
+            
+            <button id="btn-visual-toggle" class="control-button purple-btn">👁️ 標記 (精細)</button>
+            
             <button id="toggleZoomBtn" class="control-button purple-btn">影像縮放 (1.0x)</button>
             <button id="toggleChart" class="control-button yellow-btn">顯示總結圖表</button>
         </div>
         
-        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.2 Ultimate (GitHub PWA)</div>
+        <div id="debug-info" class="info-text" style="margin-top: 15px;">V20.3 Ultimate (GitHub PWA)</div>
     </div>
     
     <script src="script.js"></script>
